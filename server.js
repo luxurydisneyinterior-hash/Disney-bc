@@ -29,10 +29,15 @@ app.use(express.json());
 ========================= */
 const createTransporter = () => {
     return nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.hostinger.com",
+        port: 465, // use 587 if 465 doesn't work
+        secure: true, // true for 465, false for 587
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS, // APP PASSWORD
+            pass: process.env.EMAIL_PASS,
+        },
+        tls: {
+            rejectUnauthorized: false,
         },
     });
 };
